@@ -1,0 +1,26 @@
+{
+  "name": "vkho-playwright-automation",
+  "version": "1.0.0",
+  "description": "Automated testing framework for VKho API using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "api-testing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.14.0"
+  }
+}
