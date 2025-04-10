@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { AuthHelper } from './helpers/auth.helper';
+import { AuthHelper } from '../helpers/auth.helper';
 
-test.describe('Zones API', () => {
+test.describe('Zones API - Manager Role', () => {
   let authToken: string;
   let zoneId: number;
 

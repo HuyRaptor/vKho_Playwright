@@ -6,7 +6,7 @@ test.describe('Blocks API', () => {
   let blockId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new block', async ({ request }) => {

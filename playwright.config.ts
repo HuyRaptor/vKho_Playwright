@@ -2,10 +2,10 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   reporter: 'html',
   use: {
     baseURL: 'https://api.vkho.net',
@@ -14,16 +14,19 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'manager',
+      testMatch: /.*\/manager\/.*\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'supervisor',
+      testMatch: /.*\/supervisor\/.*\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'api',
+      testMatch: /.*\/api\/.*\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
 }); 

@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { AuthHelper } from './helpers/auth.helper';
+import { AuthHelper } from '../helpers/auth.helper';
 
-test.describe('Zones API', () => {
+test.describe('Zones API - Supervisor Role', () => {
   let authToken: string;
   let zoneId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.loginManagerCredential(request);
+    authToken = await AuthHelper.loginSupervisorCredential(request);
   });
 
   test('should create a new zone', async ({ request }) => {

@@ -6,7 +6,7 @@ test.describe('Shelves API', () => {
   let shelfId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new shelf', async ({ request }) => {

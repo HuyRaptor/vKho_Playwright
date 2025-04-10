@@ -6,7 +6,7 @@ test.describe('Packages API', () => {
   let packageId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new package', async ({ request }) => {

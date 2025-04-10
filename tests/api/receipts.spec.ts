@@ -6,7 +6,7 @@ test.describe('Receipts API', () => {
   let receiptId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new receipt', async ({ request }) => {

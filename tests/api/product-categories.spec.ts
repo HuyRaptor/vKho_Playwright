@@ -6,7 +6,7 @@ test.describe('Product Categories API', () => {
   let categoryId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new product category', async ({ request }) => {

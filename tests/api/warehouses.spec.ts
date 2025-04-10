@@ -6,7 +6,7 @@ test.describe('Warehouses API', () => {
   let warehouseId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginAdminCredential(request);
   });
 
   test('should create a new warehouse', async ({ request }) => {

@@ -1,44 +1,43 @@
 import { test, expect } from '@playwright/test';
-import { AuthHelper } from './helpers/auth.helper';
+import { AuthHelper } from '../helpers/auth.helper';
 
-test.describe('Zones API', () => {
+test.describe('Blocks API - Manager Role', () => {
   let authToken: string;
-  let zoneId: number;
+  let blockId: number;
 
   test.beforeAll(async ({ request }) => {
     authToken = await AuthHelper.loginManagerCredential(request);
   });
 
-  test('should create a new zone', async ({ request }) => {
-    const zoneData = {
-      name: 'Test Zone',
-      code: 'ZONE-' + Date.now(),
+  test('should create a new block', async ({ request }) => {
+    const blockData = {
+      name: 'Test Block',
+      code: 'BLK-' + Date.now(),
       warehouseId: 1,
       status: 'ENABLE'
     };
 
-    const response = await request.post('/zones/create', {
+    const response = await request.post('/blocks/create', {
       headers: await AuthHelper.getAuthHeader(authToken),
-      data: zoneData
+      data: blockData
     });
 
     expect(response.status()).toBe(201);
     const responseBody = await response.json();
     expect(responseBody).toHaveProperty('id');
-    zoneId = responseBody.id;
-    expect(responseBody.name).toBe(zoneData.name);
+    blockId = responseBody.id;
+    expect(responseBody.name).toBe(blockData.name);
   });
 
-  test('should get all zones', async ({ request }) => {
-    const response = await request.get('/zones/get-all', {
+  test('should get all blocks', async ({ request }) => {
+    const response = await request.get('/blocks/get-all', {
       headers: await AuthHelper.getAuthHeader(authToken),
       params: {
         page: 1,
         limit: 10,
         sortBy: 'id',
         sortDirection: 'desc',
-        warehouseId: 1,
-        zoneName: 'Test Zone'
+        warehouseId: 1
       }
     });
 
@@ -47,28 +46,28 @@ test.describe('Zones API', () => {
     expect(Array.isArray(responseBody)).toBeTruthy();
   });
 
-  test('should get a specific zone', async ({ request }) => {
-    expect(zoneId).toBeDefined();
-    const response = await request.get(`/zones/get-one/${zoneId}`, {
+  test('should get a specific block', async ({ request }) => {
+    expect(blockId).toBeDefined();
+    const response = await request.get(`/blocks/get-one/${blockId}`, {
       headers: await AuthHelper.getAuthHeader(authToken)
     });
 
     expect(response.status()).toBe(200);
     const responseBody = await response.json();
-    expect(responseBody.id).toBe(zoneId);
+    expect(responseBody.id).toBe(blockId);
   });
 
-  test('should update a zone', async ({ request }) => {
-    expect(zoneId).toBeDefined();
+  test('should update a block', async ({ request }) => {
+    expect(blockId).toBeDefined();
     const updateData = {
-      id: zoneId,
-      name: 'Updated Zone',
-      code: 'ZONE-UPDATE-' + Date.now(),
+      id: blockId,
+      name: 'Updated Block',
+      code: 'BLK-UPDATE-' + Date.now(),
       warehouseId: 1,
       status: 'ENABLE'
     };
 
-    const response = await request.put('/zones/update', {
+    const response = await request.put('/blocks/update', {
       headers: await AuthHelper.getAuthHeader(authToken),
       data: updateData
     });
@@ -78,15 +77,15 @@ test.describe('Zones API', () => {
     expect(responseBody.name).toBe(updateData.name);
   });
 
-  test('should delete a zone', async ({ request }) => {
-    expect(zoneId).toBeDefined();
-    const response = await request.delete(`/zones/delete/${zoneId}`, {
+  test('should delete a block', async ({ request }) => {
+    expect(blockId).toBeDefined();
+    const response = await request.delete(`/blocks/delete/${blockId}`, {
       headers: await AuthHelper.getAuthHeader(authToken)
     });
 
     if (response.status() !== 200) {
       const errorBody = await response.json();
-      console.error('Delete zone error:', errorBody);
+      console.error('Delete block error:', errorBody);
     }
 
     expect(response.status()).toBe(200);

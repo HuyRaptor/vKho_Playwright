@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { AuthHelper } from './helpers/auth.helper';
+import { AuthHelper } from '../helpers/auth.helper';
 
-test.describe('Vans API', () => {
+test.describe('Vans API - Supervisor Role', () => {
   let authToken: string;
   let vanId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.loginManagerCredential(request);
+    authToken = await AuthHelper.loginSupervisorCredential(request);
   });
 
   test('should create a new van', async ({ request }) => {

@@ -6,7 +6,7 @@ test.describe('Racks API', () => {
   let rackId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new rack', async ({ request }) => {

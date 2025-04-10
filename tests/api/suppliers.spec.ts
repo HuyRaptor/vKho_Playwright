@@ -6,7 +6,7 @@ test.describe('Suppliers API', () => {
   let supplierId: number;
 
   test.beforeAll(async ({ request }) => {
-    authToken = await AuthHelper.login(request);
+    authToken = await AuthHelper.loginManagerCredential(request);
   });
 
   test('should create a new supplier', async ({ request }) => {
