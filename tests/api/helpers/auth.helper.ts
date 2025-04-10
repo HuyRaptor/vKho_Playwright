@@ -4,6 +4,7 @@ export class AuthHelper {
   private static managerToken: string;
   private static supervisorToken: string;
   private static staffToken: string;
+  private static adminToken: string;
 
   static async loginManagerCredential(request: APIRequestContext): Promise<string> {
     if (this.managerToken) {
@@ -54,6 +55,23 @@ export class AuthHelper {
     const responseBody = await response.json();
     this.staffToken = responseBody.access_token;
     return this.staffToken;
+  }
+
+  static async loginAdminCredential(request: APIRequestContext): Promise<string> {
+    if (this.adminToken) {
+      return this.adminToken;
+    }
+
+    const response = await request.post('/auth/login', {
+      data: {
+        username: 'huynh22',
+        password: 'Snowfox1991'
+      }
+    });
+
+    const responseBody = await response.json();
+    this.adminToken = responseBody.access_token;
+    return this.adminToken;
   }
 
   static async getAuthHeader(token: string) {
